@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Electronics Catalog</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #333333;
+    }
+    
+    /* Top Header */
+    .top-header {
+      background: linear-gradient(135deg, #00203f 0%, #1c4c96 100%);
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 28px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo span {
+      color: #ffd700;
+      font-style: italic;
+    }
+
+    .logo i {
+      font-size: 32px;
+      color: #ffd700;
+      margin-right: 5px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+    }
+
+    .logo-subtitle {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* Search Bar */
+    .search-container {
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+      margin: 0 40px;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 10px 40px 10px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .search-bar:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 15px rgba(0, 230, 184, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #00e6b8;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .search-icon:hover {
+      color: white;
+    }
+
+    /* Header Buttons */
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .login-btn {
+      background: linear-gradient(45deg, #00e6b8, #00b894);
+      color: white;
+      padding: 12px 35px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 230, 184, 0.2);
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-icons a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+
+    .nav-icons a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .nav-icons i {
+      color: #00e6b8;
+    }
+
+    /* Navigation Menu */
+    nav {
+      background-color: white;
+      padding: 12px 30px;
+      position: fixed;
+      width: 100%;
+      top: 70px;
+      z-index: 999;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .category-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      background-color: transparent;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100px;
+      flex: 1;
+    }
+
+    .category-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .category-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 8px;
+      transition: transform 0.2s ease;
+      object-fit: contain;
+    }
+
+    .category-item:hover .category-link {
+      color: #2874f0;
+    }
+
+    .category-item:hover .category-icon {
+      transform: translateY(-2px);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      border-radius: 2px;
+      padding: 8px 0;
+      margin-top: 5px;
+    }
+
+    .category-item:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 8px 20px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f1f3f6;
+      color: #2874f0;
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: 130px;
+      background: linear-gradient(135deg, #00203f 0%, #1c4c96 100%);
+      padding: 100px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('circuit-pattern.png') repeat;
+      opacity: 0.1;
+      animation: moveBackground 20s linear infinite;
+    }
+
+    .hero h1 {
+      color: white;
+      font-size: 64px;
+      margin-bottom: 30px;
+      position: relative;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 24px;
+      margin-bottom: 50px;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .hero button {
+      background: linear-gradient(45deg, #00e6b8, #00b894);
+      color: white;
+      font-size: 20px;
+      padding: 18px 45px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .hero button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 230, 184, 0.3);
+    }
+
+    /* Shop Section */
+    #shop {
+      padding: 100px 30px;
+      text-align: center;
+      background-color: #f8f9fa;
+    }
+
+    #shop h2 {
+      color: #00203f;
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    #shop p {
+      color: #666666;
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes moveBackground {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 100% 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="header-container">
+      <div class="logo-container">
+        <a href="#" class="logo">
+          <i class="fas fa-shopping-cart"></i>
+          <div class="logo-text">
+            <div><span>ARS</span> Kart</div>
+            <div class="logo-subtitle">ELECTRONICS HUB</div>
+          </div>
+        </a>
+      </div>
+      
+      <div class="search-container">
+        <input type="text" class="search-bar" placeholder="What are you looking for today?">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </div>
+
+      <div class="header-buttons">
+        <a href="signin.html"><button  class="login-btn">Sign In</button></a>
+        
+        <div class="nav-icons">
+          <a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a>
+          <a href="#"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-container">
+      <ul class="category-list">
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="mobile.jpg" alt="Mobiles" class="category-icon">
+            Mobiles
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Latest Phones</a></li>
+            <li><a href="#" class="dropdown-item">Budget Phones</a></li>
+            <li><a href="#" class="dropdown-item">Premium Phones</a></li>
+          </ul>
+        </li>
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="laptop.jpg" class="category-icon">
+            Laptops
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Gaming Laptops</a></li>
+            <li><a href="#" class="dropdown-item">Business Laptops</a></li>
+            <li><a href="#" class="dropdown-item">Student Laptops</a></li>
+          </ul>
+        </li>
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="audio.jpg" alt="Audio" class="category-icon">
+            Audio
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Headphones</a></li>
+            <li><a href="#" class="dropdown-item">Speakers</a></li>
+            <li><a href="#" class="dropdown-item">Earbuds</a></li>
+          </ul>
+        </li>
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="smart_tv.jpg" alt="Smart TVs" class="category-icon">
+            Smart TVs
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">4K TVs</a></li>
+            <li><a href="#" class="dropdown-item">OLED TVs</a></li>
+            <li><a href="#" class="dropdown-item">Smart Android TVs</a></li>
+          </ul>
+        </li>
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="tablet.jpg" alt="Tablets" class="category-icon">
+            Tablets
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">iPads</a></li>
+            <li><a href="#" class="dropdown-item">Android Tablets</a></li>
+            <li><a href="#" class="dropdown-item">Drawing Tablets</a></li>
+          </ul>
+        </li>
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="gaming.jpg" alt="Gaming" class="category-icon">
+            Gaming
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Gaming Consoles</a></li>
+            <li><a href="#" class="dropdown-item">Gaming Accessories</a></li>
+            <li><a href="#" class="dropdown-item">Gaming Components</a></li>
+          </ul>
+        </li>
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="cameras.jpg" alt="Cameras" class="category-icon">
+            Cameras
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">DSLR Cameras</a></li>
+            <li><a href="#" class="dropdown-item">Action Cameras</a></li>
+            <li><a href="#" class="dropdown-item">Security Cameras</a></li>
+          </ul>
+        </li>
+        <li class="category-item">
+          <a href="#" class="category-link">
+            <img src="https://rukminim1.flixcart.com/flap/128/128/image/705e339964226df2.png?q=100" alt="Accessories" class="category-icon">
+            Accessories
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Chargers & Cables</a></li>
+            <li><a href="#" class="dropdown-item">Cases & Covers</a></li>
+            <li><a href="#" class="dropdown-item">Storage Devices</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Discover the Future of Electronics</h1>
+    <p>Browse top brands, get exclusive offers, and enjoy a seamless shopping experience.</p>
+    <button onclick="location.href='#shop'">Start Shopping</button>
+  </section>
+
+  <!-- Additional Content -->
+  <section id="shop">
+    <h2>Shop by Categories</h2>
+    <p>Find products from top brands and get the best offers.</p>
+  </section>
+</body>
+</html>

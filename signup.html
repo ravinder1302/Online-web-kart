@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARS Kart - Create Account</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Top Header */
+    .top-header {
+      background: linear-gradient(135deg, #00203f 0%, #1c4c96 100%);
+      padding: 15px 0;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      height: 60px;
+    }
+
+    .header-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    .logo {
+      font-size: 28px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo span {
+      color: #ffd700;
+      font-style: italic;
+    }
+
+    .logo i {
+      font-size: 32px;
+      color: #ffd700;
+      margin-right: 5px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+    }
+
+    .logo-subtitle {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* Signup Container */
+    .signup-container {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding-top: 60px;
+      box-sizing: border-box;
+    }
+
+    .signup-box {
+      display: flex;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+      max-height: calc(100vh - 140px);
+      margin: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .signup-left {
+      background: linear-gradient(135deg, #00203f 0%, #1c4c96 100%);
+      color: white;
+      padding: 30px;
+      width: 40%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .signup-left::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    }
+
+    .signup-left h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .signup-left p {
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.9;
+      position: relative;
+    }
+
+    .signup-right {
+      padding: 30px;
+      width: 60%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .input-row .input-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #1c4c96;
+      box-shadow: 0 0 0 2px rgba(28, 76, 150, 0.1);
+      outline: none;
+    }
+
+    .signup-btn {
+      background: linear-gradient(45deg, #00e6b8, #00b894);
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 15px;
+    }
+
+    .signup-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 230, 184, 0.2);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .divider span {
+      padding: 0 10px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .google-signup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .google-signup:hover {
+      background-color: #f8f9fa;
+      border-color: #1c4c96;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .google-signup img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .terms {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .terms a {
+      color: #1c4c96;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .terms a:hover {
+      text-decoration: underline;
+    }
+
+    .login-link {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .login-link a {
+      color: #1c4c96;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .password-requirements {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .password-requirements ul {
+      margin: 5px 0 0 20px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .password-requirements li {
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #dc3545;
+      transition: color 0.3s ease;
+    }
+
+    .password-requirements li::before {
+      content: '×';
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .password-requirements li.valid {
+      color: #28a745;
+    }
+
+    .password-requirements li.valid::before {
+      content: '✓';
+    }
+
+    .menu-bar {
+      position: fixed;
+      left: 0;
+      top: 60px;
+      bottom: 0;
+      width: 250px;
+      background: white;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px 0;
+      z-index: 900;
+      overflow-y: auto;
+    }
+
+    .menu-section {
+      margin-bottom: 25px;
+    }
+
+    .menu-section h3 {
+      color: #666;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0 20px;
+      margin-bottom: 10px;
+    }
+
+    .menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-item {
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-item:hover {
+      background: #f8f9fa;
+      color: #1c4c96;
+    }
+
+    .menu-item i {
+      width: 20px;
+      text-align: center;
+      color: #666;
+    }
+
+    .menu-item:hover i {
+      color: #1c4c96;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="header-container">
+      <a href="home.html" class="logo">
+        <i class="fas fa-shopping-cart"></i>
+        <div class="logo-text">
+          <div><span>ARS</span> Kart</div>
+          <div class="logo-subtitle">ELECTRONICS HUB</div>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- Menu Bar -->
+  <div class="menu-bar">
+    <div class="menu-section">
+      <h3>Categories</h3>
+      <ul class="menu-list">
+        <li><a href="#" class="menu-item"><i class="fas fa-mobile-alt"></i> Mobiles</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-laptop"></i> Laptops</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-headphones"></i> Audio</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-tv"></i> Smart TVs</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-tablet-alt"></i> Tablets</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-gamepad"></i> Gaming</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-camera"></i> Cameras</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-keyboard"></i> Accessories</a></li>
+      </ul>
+    </div>
+    <div class="menu-section">
+      <h3>Customer Service</h3>
+      <ul class="menu-list">
+        <li><a href="#" class="menu-item"><i class="fas fa-headset"></i> Contact Us</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-question-circle"></i> FAQ</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-truck"></i> Shipping</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-undo"></i> Returns</a></li>
+      </ul>
+    </div>
+    <div class="menu-section">
+      <h3>About Us</h3>
+      <ul class="menu-list">
+        <li><a href="#" class="menu-item"><i class="fas fa-info-circle"></i> About ARS Kart</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-briefcase"></i> Careers</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-newspaper"></i> Press</a></li>
+        <li><a href="#" class="menu-item"><i class="fas fa-blog"></i> Blog</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Signup Section -->
+  <div class="signup-container">
+    <div class="signup-box">
+      <div class="signup-left">
+        <h2>Create Account</h2>
+        <p>Join ARS Kart to discover amazing deals on electronics and get personalized recommendations.</p>
+      </div>
+      <div class="signup-right">
+        <div class="input-row">
+          <div class="input-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" placeholder="Enter your first name">
+          </div>
+          <div class="input-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" placeholder="Enter your last name">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email address">
+        </div>
+        <div class="input-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number">
+        </div>
+        <div class="input-group">
+          <label for="password">Create Password</label>
+          <input type="password" id="password" placeholder="Create a strong password">
+          <div class="password-requirements">
+            Password must contain:
+            <ul>
+              <li id="length">At least 8 characters</li>
+              <li id="uppercase">One uppercase letter</li>
+              <li id="number">One number</li>
+              <li id="special">One special character</li>
+            </ul>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" placeholder="Confirm your password">
+        </div>
+        
+        <button class="signup-btn">Create Account</button>
+        
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <button class="google-signup">
+          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=" alt="Google logo">
+          Sign up with Google
+        </button>
+
+        <p class="terms">
+          By creating an account, you agree to ARS Kart's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
+        </p>
+        <div class="login-link">
+          <a href="signin.html">Already have an account? Sign in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  document.getElementById('password').addEventListener('input', function(e) {
+    const password = e.target.value;
+    
+    // Check length
+    const lengthValid = password.length >= 8;
+    const lengthElement = document.getElementById('length');
+    lengthElement.classList.toggle('valid', lengthValid);
+    
+    // Check uppercase
+    const uppercaseValid = /[A-Z]/.test(password);
+    const uppercaseElement = document.getElementById('uppercase');
+    uppercaseElement.classList.toggle('valid', uppercaseValid);
+    
+    // Check number
+    const numberValid = /[0-9]/.test(password);
+    const numberElement = document.getElementById('number');
+    numberElement.classList.toggle('valid', numberValid);
+    
+    // Check special character
+    const specialValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const specialElement = document.getElementById('special');
+    specialElement.classList.toggle('valid', specialValid);
+  });
+  </script>
+</body>
+</html> 
